@@ -1,7 +1,7 @@
 21 - Movie Length Scraping - Excel + Selenium
-- take an already existing title + it`s release year from the MoviePY excel sheet
-- look for it in a search engine combined with a movie database title / using search engine as a pre-step, because (apart from IMDb) not able to search by movie title + release year, which makes our search more precise
-- open the first match = open the title`s movie database site
+- take an already existing title(which does not have movie length yet) + it`s release year from the MoviePY excel sheet 
+- look for it on IMDb
+- open the first match in the roll down results = open the title`s movie database site
 - take the length of the movie
 - paste it into the excel sheet
 - repeat it for the full sheet -> we are going to have a better estimations about the total time spent on watching movies
