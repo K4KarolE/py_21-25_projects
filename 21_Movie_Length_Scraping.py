@@ -20,6 +20,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+PATH = 'C:\Program Files (x86)\chromedriver.exe'
+driver = webdriver.Chrome(PATH)
+# driver.minimize_window()
+driver.get('https://www.imdb.com')  
+
 #BANNER
 print()
 k = 50
@@ -31,8 +36,8 @@ print('*'*k)
 
 # VALUE EXTRACTION FROM THE EXCEL
 
-cellnumber = 15
-
+cellnumber = 30    # aka row number
+counter = 0
 
 cell = 'C' + str(cellnumber)
 movietitle = ws[cell].value
@@ -75,47 +80,78 @@ while movietitle == None or movietitle == '-' or isItShow() or movieLengthHour !
 
 
 
-
-
-
+k = len(str(movietitle)) + 35 # using for error messages
 searchForMovie = ' '.join([ str(movietitle), str(releaseYear) ])
 
-PATH = 'C:\Program Files (x86)\chromedriver.exe'
-driver = webdriver.Chrome(PATH)
-# driver.minimize_window()
-driver.get('https://www.imdb.com')  
-                                           
+
+# IMDb SEARCH BOX                                         
 try:
     element = WebDriverWait(driver, 10).until(
     EC.presence_of_element_located((By.ID, 'suggestion-search' ))
             )
+    search = driver.find_element(By.ID,'suggestion-search')
+    search.send_keys(searchForMovie)
+except:
+        driver.quit()
+
+# CLICK ON THE FIRST OF THE RESULTS
+try:
+    element = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.XPATH,'//*[@id="react-autowhatever-1--item-0"]/a' ))
+            )
+    search = driver.find_element(By.XPATH,'//*[@id="react-autowhatever-1--item-0"]/a')
+    search.click()
+except:
+        driver.quit()
+
+# TAKING THE LENGTH VALUE
+try:
+    element = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.XPATH,'//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[2]' ))
+            )
+    movieLengthSum = driver.find_element(By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[2]').text
+    # taking the 2nd item(length) from "2022 1h 33m"
+
+    if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum): # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
+        movieLengthSum = driver.find_element(By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[3]').text
 except:
         driver.quit()
 
 
-search = driver.find_element(By.ID,'suggestion-search')
-search.send_keys(searchForMovie)
+# VALUATE AND TRANSFORM THE LENGTH VALUE(S)
+lengthHour = None
+lengthMinute = None
+# JUST ONE ITEM LENGTH VALUE, LIKE 45m OR 2h
+if len(str(movieLengthSum).split()) == 1:
+    if 'h' in list(str(movieLengthSum)):
+        lengthHour = str(movieLengthSum).strip('hm') # removing the "h" or "m" values, i know, in this case, just 'h' should ve there
+    if 'm' in list(str(movieLengthSum)):
+        lengthMinute = str(movieLengthSum).strip('hm')
+
+# TWO ITEMS LENGTH VALUES, LIKE 2h 32m
+if len(str(movieLengthSum).split()) == 2:
+    lengthList = str(movieLengthSum).split() 
+    lengthHour = lengthList[0].strip('hm')
+    lengthMinute = lengthList[1].strip('hm')
+
+# ADDING THE VALUES TO EXCEL
+if lengthHour != None:
+    ws[cellLengthHour].value = str(lengthHour)
+if lengthMinute != None:
+    ws[cellLengthMin].value = str(lengthMinute)
 
 
-time.sleep(2)
-
-search = driver.find_element(By.XPATH,'//*[@id="react-autowhatever-1--item-0"]/a')
-search.click()
-
-
-time.sleep(3)
-movieLengthSum = driver.find_element(By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[2]').text
-# taking the 2nd item from "2022 1h 33m"
-
-if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum): # if movie has classification(PG-13): "2022 PG-13 1h 33m" taking the 3rd item
-    movieLengthSum = driver.find_element(By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[3]').text
-
+wb.save('MoviePY.xlsx')
        
-#         driver.quit()
+
+
 
 print('******************************************')
 print(movieLengthSum)
-
+print('******************************************')
+print(lengthHour)
+print(lengthMinute)
+print('******************************************')
 
 
 
