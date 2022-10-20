@@ -11,7 +11,6 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 
 import time, sys
@@ -20,25 +19,16 @@ from openpyxl import load_workbook
 wb = load_workbook('MoviePY.xlsx', data_only=True)
 ws = wb.active
 
-
-# driver.minimize_window()
-# driver.get('https://www.imdb.com')
-
-
-
-# BANNER
+# PLEASE WAIT BANNER
 print()
 k = 50
 print('*'*k)
 print(' Please wait, the program is loading '.center(k, '*'))
 print('*'*k)
 
-
 # VALUE EXTRACTION FROM THE EXCEL
-
-cellnumber = 6    # aka row number
-n = 0 # extra delay between 2 search
-
+cellnumber = 6      # aka row number
+n = 0               # it will be an extra delay between 2 search
 while True:
     try:
         PATH = 'C:\Program Files (x86)\chromedriver.exe'
@@ -86,7 +76,7 @@ while True:
         k = len(str(movietitle)) + 35  # using for error messages
         searchForMovie = ' '.join([str(movietitle), str(releaseYear)])
 
-        # IMDb SEARCH BOX
+# IMDb SEARCH BOX
         try:
             element = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located(
@@ -97,7 +87,7 @@ while True:
         except:
             driver.quit()
 
-        # CLICK ON THE FIRST OF THE RESULTS
+# CLICK ON THE FIRST OF THE RESULTS
         try:
             element = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located(
@@ -109,7 +99,7 @@ while True:
         except:
             driver.quit()
 
-        # TAKING THE LENGTH VALUE
+# TAKING THE LENGTH VALUE
         try:
             element = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located(
@@ -120,7 +110,6 @@ while True:
             movieLengthSum = driver.find_element(
                 By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[2]').text
             
-
             # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
             if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
                 movieLengthSum = driver.find_element(
@@ -128,10 +117,10 @@ while True:
         except:
             driver.quit()
 
-        # VALUATE AND TRANSFORM THE LENGTH VALUE(S)
+# VALUATE AND TRANSFORM THE LENGTH VALUE(S)
         lengthHour = None
         lengthMinute = None
-        # JUST ONE ITEM LENGTH VALUE, LIKE 45m OR 2h
+    # JUST ONE ITEM LENGTH VALUE, LIKE 45m OR 2h
         if len(str(movieLengthSum).split()) == 1:
             if 'h' in list(str(movieLengthSum)):
                 # removing the "h" or "m" values, i know, in this case, just 'h' should ve there
@@ -139,23 +128,24 @@ while True:
             if 'm' in list(str(movieLengthSum)):
                 lengthMinute = str(movieLengthSum).strip('hm')
 
-        # TWO ITEMS LENGTH VALUES, LIKE 2h 32m
+    # TWO ITEMS LENGTH VALUES, LIKE 2h 32m
         if len(str(movieLengthSum).split()) == 2:
             lengthList = str(movieLengthSum).split()
             lengthHour = lengthList[0].strip('hm')
             lengthMinute = lengthList[1].strip('hm')
 
-        # ADDING THE VALUES TO EXCEL
+# ADDING THE VALUES TO EXCEL
         if lengthHour != None:
             ws[cellLengthHour].value = str(lengthHour)
         if lengthMinute != None:
             ws[cellLengthMin].value = str(lengthMinute)
-        
-        
+                
         driver.close()
         cellnumber += 3  # because of the merged cells, 3 is the minimum distance between 2 titles
-        time.sleep(14 + n)
+        time.sleep(14 + n)  # ad extra/growing delay between two search till 27 sec.
         n += 1
+        if n == 14:
+            n = 0
 
     except KeyboardInterrupt:                                     
         print()                                
