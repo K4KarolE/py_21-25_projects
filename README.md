@@ -7,7 +7,7 @@
 - repeat it for the full sheet -> we are going to have a better estimations about the total time spent on watching movies
 
 22 - Movie Details Scraping - Excel + Selenium
-- user already has the the movie database link in clipboard
-- user starts the program
-- asking which row in the excel sheet will be used
-- collecting the movie details(title, director, stars..) from the site and adding to the excel sheet
+- ask the new title`s IMDb link
+- ask the row the new record should be place
+- collect the movie details(title, director, stars..) from the site and add to the excel sheet
+- open a hungarian movie site looking for the title

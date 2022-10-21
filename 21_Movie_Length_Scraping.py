@@ -16,7 +16,7 @@ from selenium import webdriver
 import time, sys
 
 from openpyxl import load_workbook
-wb = load_workbook('MoviePY.xlsx', data_only=True)
+wb = load_workbook('MoviePY.xlsx')
 ws = wb.active
 
 # PLEASE WAIT BANNER
