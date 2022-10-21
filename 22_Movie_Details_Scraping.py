@@ -1,9 +1,10 @@
 '''
 22 - Movie Details Scraping - Excel + Selenium
 - asking the new title`s IMDb link
-- asking the row the new record should be place
+- ( asking the row the new record should be place ) - openpyxl removes images from 2nd tab in my original excel sheet(not part of MoviePY.xlsx) -> changed to an addition excel sheet line 20 with a permanent row/cellnumber(line 32)
 - collecting the movie details(title, director, stars..) from the site and adding to the excel sheet
 - opening a hungarian movie site looking for the title
+- if you want to test it, make sure the excel sheet links are updated (line 20, 226)
 '''
 
 from selenium.webdriver.support import expected_conditions as EC
@@ -16,7 +17,7 @@ from datetime import date
 import sys
 
 from openpyxl import load_workbook
-wb = load_workbook('MoviePY.xlsx')
+wb = load_workbook('D:/Movies_New_Record.xlsx')
 ws = wb.active
 
 # BANNER
@@ -28,7 +29,7 @@ print(' Z-z-z '*k)
 print()
 
 link = input(' Please add the new record`s IMDb link: ')
-cellnumber = input(' Please add the row number of the new record: ')
+cellnumber = 3   # cellnumber = input(' Please add the row number of the new record: ') - please see the description for more information
 
 PATH = 'C:\Program Files (x86)\chromedriver.exe'
 driver = webdriver.Chrome(PATH)
@@ -222,7 +223,7 @@ ws[day].value = formula
 cellRFirst = 'O' + str(cellnumber)
 ws[cellRFirst].value = '1st'        
 
-wb.save('MoviePY.xlsx')
+wb.save('D:/Movies_New_Record.xlsx')
 
 # LOOKING FOR THE HUNGARIAN TITLE
 link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
