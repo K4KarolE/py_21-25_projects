@@ -19,7 +19,6 @@ from openpyxl import load_workbook
 wb = load_workbook('MoviePY.xlsx')
 ws = wb.active
 
-
 # BANNER
 print()
 k = 11
