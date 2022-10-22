@@ -11,3 +11,7 @@
 - ask the row the new record should be place
 - collect the movie details(title, director, stars..) from the site and add to the excel sheet
 - open a hungarian movie site looking for the title
+
+23 - Contact Details Collector - Regular Expressions
+- ask for a file (location)
+- give back the email addresses and phone numbers if there any in the file
