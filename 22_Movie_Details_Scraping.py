@@ -1,10 +1,11 @@
 '''
-22 - Movie Details Scraping - Excel + Selenium
-- asking the new title`s IMDb link
-- ( asking the row the new record should be place ) - openpyxl removes images from 2nd tab in my original excel sheet(not part of MoviePY.xlsx) -> changed to an addition excel sheet line 20 with a permanent row/cellnumber(line 32)
-- collecting the movie details(title, director, stars..) from the site and adding to the excel sheet
-- opening a hungarian movie site looking for the title
-- if you want to test it, make sure the excel sheet links are updated (line 20, 226)
+22 - Movie Details Scraping - Excel + Selenium  / not optimized for TV series 
+- ask the new title`s IMDb link
+- collect the movie details(title, director, stars..) from the site and add to the excel sheet
+- open the poster image in the same tab (the poster image is not 'right click saveable' on IMDb by default)
+- in a new browser tab look for the movie`s hungarian title
+- end of process confirmation message displayed
+- if you want to test it, make sure the excel sheet links are updated (around line 21, 229)
 '''
 
 from selenium.webdriver.support import expected_conditions as EC
@@ -229,7 +230,7 @@ wb.save('D:/Movies_New_Record.xlsx')
 
 # POSTER IMAGE
 try:
-        poster = driver.find_element(By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[1]/div/div[1]/div/div/div[1]/img')
+        poster = driver.find_element(By.CSS_SELECTOR, '.ipc-media--poster-l > img:nth-child(1)')
         posterLink = poster.get_attribute('src')
         driver.get(posterLink)
 except:
@@ -237,9 +238,8 @@ except:
         print('*** ERROR - POSTER ***')
         print()
 
-
 # LOOKING FOR THE HUNGARIAN TITLE
-driver.execute_script("window.open('about:blank','secondtab');") # open a new tab in the browser
+driver.execute_script("window.open('about:blank','secondtab');")        # open a new tab in the browser
 driver.switch_to.window("secondtab")
 
 link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])

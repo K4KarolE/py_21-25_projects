@@ -8,9 +8,10 @@
 
 22 - Movie Details Scraping - Excel + Selenium
 - ask the new title`s IMDb link
-- ask the row the new record should be place
 - collect the movie details(title, director, stars..) from the site and add to the excel sheet
-- open a hungarian movie site looking for the title
+- open the poster image in the same tab (the poster image is not 'right click saveable' on IMDb by default)
+- in a new browser tab look for the movie`s hungarian title
+- end of process confirmation message displayed
 
 23 - Contact Details Collector - Regular Expressions
 - ask for a file (location)
