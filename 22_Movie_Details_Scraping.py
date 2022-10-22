@@ -24,9 +24,11 @@ ws = wb.active
 print()
 k = 11
 print(' Z-z-z '*k)
-print(' I am Db Bee! '.center(len(' Z-z-z '*k)))
-print(' Z-z-z '*k)
 print()
+print(' I am Db Bee! '.center(len(' Z-z-z '*k)))
+print()
+print(' Z-z-z '*k)
+print('\n')
 
 link = input(' Please add the new record`s IMDb link: ')
 cellnumber = 3   # cellnumber = input(' Please add the row number of the new record: ') - please see the description for more information
@@ -225,7 +227,25 @@ ws[cellRFirst].value = '1st'
 
 wb.save('D:/Movies_New_Record.xlsx')
 
+# POSTER IMAGE
+try:
+        poster = driver.find_element(By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[1]/div/div[1]/div/div/div[1]/img')
+        posterLink = poster.get_attribute('src')
+        driver.get(posterLink)
+except:
+        print()
+        print('*** ERROR - POSTER ***')
+        print()
+
+
 # LOOKING FOR THE HUNGARIAN TITLE
+message = ' Please press any key for the Hungarian title. '
+print()
+print('*' * (len(message) + 6))
+print(message.center((len(message) + 6), '*'  ))
+print('*' * (len(message) + 6))
+print()
+input()
 link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
 driver.get(link)
 
@@ -233,7 +253,9 @@ driver.get(link)
 k = 6
 print()
 print(' Z-z-z '*k)
+print()
 print(' Honey added to your jar '.center(len(' Z-z-z '*k)))
+print()
 print(' Z-z-z '*k)
 print()
 
