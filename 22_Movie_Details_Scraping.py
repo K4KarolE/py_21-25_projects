@@ -239,13 +239,9 @@ except:
 
 
 # LOOKING FOR THE HUNGARIAN TITLE
-message = ' Please press any key for the Hungarian title. '
-print()
-print('*' * (len(message) + 6))
-print(message.center((len(message) + 6), '*'  ))
-print('*' * (len(message) + 6))
-print()
-input()
+driver.execute_script("window.open('about:blank','secondtab');") # open a new tab in the browser
+driver.switch_to.window("secondtab")
+
 link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
 driver.get(link)
 
