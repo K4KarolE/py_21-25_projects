@@ -35,7 +35,7 @@ PATH = 'C:\Program Files (x86)\chromedriver.exe'
 driver = webdriver.Chrome(PATH)
 driver.get(link)
 
-# VARIABLES FOR THE READOUT - avoiding errors at the excel write stage, if the there are less then 3 records/types to add
+# VARIABLES FOR THE READOUT - avoiding errors at the excel write stage, if the there are less than 3 records/types to add
 director_1_Read = None
 director_2_Read = None
 director_3_Read = None
