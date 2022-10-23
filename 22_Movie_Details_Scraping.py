@@ -1,5 +1,5 @@
 '''
-22 - Movie Details Scraping - Excel + Selenium  / not optimized for TV series 
+22 - Movie Details Scraping - Excel + Selenium  / optimized for movies, not ideal for TV series, TV specials / 
 - ask the new title`s IMDb link
 - collect the movie details(title, director, stars..) from the site and add to the excel sheet
 - open the poster image in the same tab (the poster image is not 'right click saveable' on IMDb by default)
@@ -139,7 +139,7 @@ lengthMinute = None
 # JUST ONE ITEM LENGTH VALUE, LIKE 45m OR 2h
 if len(str(movieLengthSum).split()) == 1:
         if 'h' in list(str(movieLengthSum)):
-                lengthHour = str(movieLengthSum).strip('hm')    # removing the "h" or "m" values, i know, in this case, just 'h' should be there
+                lengthHour = str(movieLengthSum).strip('hm')    # removing the "h" or "m" values, i know, in this scenario, just 'h' should be fine
         if 'm' in list(str(movieLengthSum)):
                 lengthMinute = str(movieLengthSum).strip('hm')
 
@@ -159,50 +159,62 @@ cellRYear = 'E' + str(cellnumber)
 ws[cellRYear].value = yearRead
 
 # DIRECTOR(S)
+cellRDirector_1 = 'F' + str(cellnumber)
+ws[cellRDirector_1].value = None                # removing the previous value from the cell
 if director_1_Read != None:
-        cellRDirector_1 = 'F' + str(cellnumber)
         ws[cellRDirector_1].value = director_1_Read
 
+cellRDirector_2 = 'F' + str(int(cellnumber) + 1)
+ws[cellRDirector_2].value = None
 if director_2_Read != None:
-        cellRDirector_2 = 'F' + str(int(cellnumber) + 1)
         ws[cellRDirector_2].value = director_2_Read
 
+cellRDirector_3 = 'F' + str(int(cellnumber) + 2)
+ws[cellRDirector_3].value = None
 if director_3_Read != None:
-        cellRDirector_3 = 'F' + str(int(cellnumber) + 1)
         ws[cellRDirector_3].value = director_3_Read
 
 # STAR(S)
+cellRStar_1 = 'G' + str(cellnumber)
+ws[cellRStar_1].value = None                   # removing the previous value from the cell    
 if star_1_Read != None:
-        cellRStar_1 = 'G' + str(cellnumber)
         ws[cellRStar_1].value = star_1_Read
 
+cellRStar_2 = 'G' + str(int(cellnumber) + 1)
+ws[cellRStar_2].value = None
 if star_2_Read != None:
-        cellRStar_2 = 'G' + str(int(cellnumber) + 1)
         ws[cellRStar_2].value = star_2_Read
 
+cellRStar_3 = 'G' + str(int(cellnumber) + 2)
+ws[cellRStar_3].value = None
 if star_3_Read != None:
-        cellRStar_3 = 'G' + str(int(cellnumber) + 2)
         ws[cellRStar_3].value = star_3_Read
 
 # GENRE(S)
+cellRGenre_1 = 'H' + str(cellnumber)
+ws[cellRGenre_1].value = None                   # removing the previous value from the cell
 if genre_1_Read != None:
-        cellRGenre_1 = 'H' + str(cellnumber)
         ws[cellRGenre_1].value = genre_1_Read
 
+cellRGenre_2 = 'I' + str(cellnumber)
+ws[cellRGenre_2].value = None
 if genre_2_Read != None:
-        cellRGenre_2 = 'I' + str(cellnumber)
         ws[cellRGenre_2].value = genre_2_Read
 
+cellRGenre_3 = 'J' + str(cellnumber)
+ws[cellRGenre_3].value = None
 if genre_3_Read != None:
-        cellRGenre_3 = 'J' + str(cellnumber)
         ws[cellRGenre_3].value = genre_3_Read
 
 # MOVIE LENGTH
+cellLengthHour = 'Q' + str(cellnumber)
+ws[cellLengthHour].value = None                 # removing the previous value from the cell
 if lengthHour != None:
-        cellLengthHour = 'Q' + str(cellnumber)
         ws[cellLengthHour].value = str(lengthHour)
+
+cellLengthMin = 'R' + str(cellnumber)
+ws[cellLengthMin].value = None    
 if lengthMinute != None:
-        cellLengthMin = 'R' + str(cellnumber)
         ws[cellLengthMin].value = str(lengthMinute)
 
 # TODAY`S DATE
