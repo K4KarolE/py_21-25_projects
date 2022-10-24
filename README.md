@@ -16,3 +16,6 @@
 23 - Contact Details Collector - Regular Expressions
 - ask for a file (location)
 - give back the email addresses and phone numbers if there any in the file
+
+24 - Movie Quotes To Clipboard
+V1 - start the program in command line -> it will copy the value of the keyphrase to clipboard
