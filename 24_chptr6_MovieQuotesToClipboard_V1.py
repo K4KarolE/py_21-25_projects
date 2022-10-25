@@ -1,6 +1,6 @@
 
 '''
-24 - Movie Quotes To Clipboard - V1
+24 - Movie Quotes To Clipboard - V1 - Chapter 6 - Practice
 - In command in the program`s folder, the format:
         py name of the program(24_chptr6_MovieQuotesToClipboard_V1) keyphrase(like zoo, fish..)
 

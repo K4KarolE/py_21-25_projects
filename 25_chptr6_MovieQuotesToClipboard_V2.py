@@ -1,6 +1,6 @@
 
 '''
-25 - Movie Quotes To Clipboard - V2
+25 - Movie Quotes To Clipboard - V2 - Chapter 6 - Practice
 - ask the user for a keyword or list of the keywords or quite
 - the movie quote belongs to the keyword will be displayed and copied to the clipboard
 '''

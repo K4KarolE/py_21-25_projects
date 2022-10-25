@@ -17,9 +17,9 @@
 - ask for a file (location)
 - give back the email addresses and phone numbers if there any in the file
 
-24 - Movie Quotes To Clipboard - V1
+24 - Movie Quotes To Clipboard - V1 - Chapter 6 - Practice
 - start the program in command line -> it will copy the value of the keyphrase to clipboard
 
-25 - Movie Quotes To Clipboard - V2
+25 - Movie Quotes To Clipboard - V2 - Chapter 6 - Practice
 - ask the user for a keyword or list of the keywords or quite
 - the movie quote belongs to the keyword will be displayed and copied to the clipboard
