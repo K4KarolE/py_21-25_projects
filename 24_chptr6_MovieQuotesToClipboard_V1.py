@@ -1,8 +1,10 @@
 
-'''In command in the program`s folder, the format:
+'''
+24 - Movie Quotes To Clipboard - V1
+- In command in the program`s folder, the format:
         py name of the program(24_chptr6_MovieQuotesToClipboard_V1) keyphrase(like zoo, fish..)
 
-The program will copy the value of the keyphrase to clipboard.
+- The program will copy the value of the keyphrase to clipboard.
 '''
 
 text = { 'zoo': "I've had it with these motherfucking snakes on this motherfucking plane!",
