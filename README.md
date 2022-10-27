@@ -13,7 +13,7 @@
 - in a new browser tab look for the movie`s hungarian title
 - end of process confirmation message displayed
 
-23 - Movie Details Scraping - Excel + Selenium / optimized for TV series /
+23 - TV Show Details Scraping - Excel + Selenium / optimized for TV series /
 - same behavior as project 22, just for TV shows
 
 24 - Movie Quotes To Clipboard - V1 - Chapter 6 - Practice
