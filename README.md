@@ -13,9 +13,8 @@
 - in a new browser tab look for the movie`s hungarian title
 - end of process confirmation message displayed
 
-23 - Contact Details Collector - Regular Expressions
-- ask for a file (location)
-- give back the email addresses and phone numbers if there any in the file
+23 - Movie Details Scraping - Excel + Selenium / optimized for TV series /
+- same behavior as project 22, just for TV shows
 
 24 - Movie Quotes To Clipboard - V1 - Chapter 6 - Practice
 - start the program in command line -> it will copy the value of the keyphrase to clipboard
