@@ -31,8 +31,8 @@ print()
 print(' Z-z-z '*k)
 print('\n')
 
-link = input(' Please add the new record`s IMDb link: ')
-cellnumber = 3   # cellnumber = input(' Please add the row number of the new record: ') - please see the description for more information
+link = input(' Please add the new TV Show`s IMDb link: ')
+cellnumber = 3
 
 PATH = 'C:\Program Files (x86)\chromedriver.exe'
 driver = webdriver.Chrome(PATH)
@@ -143,6 +143,12 @@ ws[cellRYear].value = yearRead
 # DIRECTOR(S)
 cellRDirector = 'F' + str(cellnumber)
 ws[cellRDirector].value = '-'                # ignoring the directors for TV shows
+
+cellRDirector_2 = 'F' + str(int(cellnumber) + 1)
+ws[cellRDirector_2].value = None                        # removing the previous value from the cell
+
+cellRDirector_3 = 'F' + str(int(cellnumber) + 2)
+ws[cellRDirector_3].value = None
 
 # STAR(S)
 cellRStar_1 = 'G' + str(cellnumber)

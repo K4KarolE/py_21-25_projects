@@ -31,8 +31,8 @@ print()
 print(' Z-z-z '*k)
 print('\n')
 
-link = input(' Please add the new record`s IMDb link: ')
-cellnumber = 3   # cellnumber = input(' Please add the row number of the new record: ') - please see the description for more information
+link = input(' Please add the new Movie`s IMDb link: ')
+cellnumber = 3
 
 PATH = 'C:\Program Files (x86)\chromedriver.exe'
 driver = webdriver.Chrome(PATH)
