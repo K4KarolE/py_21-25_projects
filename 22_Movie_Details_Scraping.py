@@ -5,7 +5,7 @@
 - open the poster image in the same tab (the poster image is not 'right click saveable' on IMDb by default)
 - in a new browser tab look for the movie`s hungarian title
 - end of process confirmation message displayed
-- if you want to test it, make sure the excel sheet links are updated (around line 21, 229)
+- if you want to test it, make sure the excel sheet links are updated (around line 21, 244)
 '''
 
 from selenium.webdriver.support import expected_conditions as EC
@@ -38,7 +38,9 @@ PATH = 'C:\Program Files (x86)\chromedriver.exe'
 driver = webdriver.Chrome(PATH)
 driver.get(link)
 
-# VARIABLES FOR THE READOUT - avoiding errors at the excel write stage, if the there are less than 3 records/types to add
+# VARIABLES FOR THE READOUT - avoiding errors at the excel writing stage
+# - if the there are less than 3 records/types to add
+# - no length value displayed on IMDb
 director_1_Read = None
 director_2_Read = None
 director_3_Read = None
@@ -48,6 +50,7 @@ star_3_Read = None
 genre_1_Read = None
 genre_2_Read = None
 genre_3_Read = None
+movieLengthSum = None
 
 # TAKING THE VALUES FROM THE 
 # MOVIE TITLE
