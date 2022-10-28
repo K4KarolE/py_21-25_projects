@@ -1,11 +1,11 @@
 '''
-23 - Movie Details Scraping - Excel + Selenium / optimized for TV series /
+23 - TV Show Details Scraping - Excel + Selenium / optimized for TV series /
 - ask the new title`s IMDb link
 - collect the TV show details(title, director, stars..) from the site and add to the excel sheet
 - open the poster image in the same tab (the poster image is not 'right click saveable' on IMDb by default)
 - in a new browser tab look for the movie`s hungarian title
 - end of process confirmation message displayed
-- if you want to test it, make sure the excel sheet links are updated (around line 21, 229)
+- if you want to test it, make sure the excel sheet links are updated (around line 21, 211)
 '''
 
 from selenium.webdriver.support import expected_conditions as EC
@@ -38,16 +38,16 @@ PATH = 'C:\Program Files (x86)\chromedriver.exe'
 driver = webdriver.Chrome(PATH)
 driver.get(link)
 
-# VARIABLES FOR THE READOUT - avoiding errors at the excel write stage, if the there are less than 3 records/types to add
-director_1_Read = None
-director_2_Read = None
-director_3_Read = None
+# VARIABLES FOR THE READOUT - avoiding errors at the excel writing stage
+# - if the there are less than 3 records/types to add
+# - no length value displayed on IMDb
 star_1_Read = None
 star_2_Read = None
 star_3_Read = None
 genre_1_Read = None
 genre_2_Read = None
 genre_3_Read = None
+movieLengthSum = None
 
 # TAKING THE VALUES FROM THE 
 # MOVIE TITLE
@@ -69,39 +69,25 @@ except:
 # YEAR OF RELEASE
 try:
         yearRead = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[1]/a').text # if only one item(year) there is no index in the last li[1] just li
-                   
+        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[2]').text              
 except:
         print()
         print('*** ERROR - YEAR OF RELEASE ***')
         print()
 
-# DIRECTOR(S)
-try:    
-        director_1_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[1]/a').text
-
-        director_2_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[2]/a').text
-
-        director_3_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[1]/div/ul/li[3]/a').text   
-except:
-        print() # most of the time the movies have only 1 director -> would trigger an error message / not help to identify, if there is a valid error
-
 # STAR(S)
 try:    
         star_1_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[1]/a').text
+        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[2]/div/ul/li[1]/a').text
 
         star_2_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[2]/a').text
+        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[2]/div/ul/li[2]/a').text
 
         star_3_Read = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[3]/div/ul/li[3]/a').text
+        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[3]/ul/li[2]/div/ul/li[3]/a').text
 except:
         print()
-        print('*** ERROR - STARS ***') # would be triggered if the movie has less than 3 stars
+        print('*** ERROR - STARS ***') # would be triggered if the TV show has less than 3 stars
         print()
         
 # GENRE(S)
@@ -115,18 +101,14 @@ try:
         genre_3_Read = driver.find_element(
         By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]/a[3]/span').text
 except:
-        print() # would be triggered if the movie has less than 3 genres
+        print() # would be triggered if the TV show has less than 3 genres
 
 # TAKING THE LENGTH VALUE
 try:
         # taking the 2nd item(length) from "2022 1h 33m"
         movieLengthSum = driver.find_element(
-        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[2]').text
+        By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[4]').text
 
-        # if the movie has classification(pg-13): "2022 pg-13 1h 33m" taking the 3rd item
-        if 'h' not in list(movieLengthSum) or 'm' not in list(movieLengthSum):
-                movieLengthSum = driver.find_element(
-                By.XPATH, '//*[@id="__next"]/main/div/section[1]/section/div[3]/section/section/div[2]/div[1]/div/ul/li[3]').text
 except:
         print()
         print('*** ERROR - LENGTH ***')
@@ -159,20 +141,8 @@ cellRYear = 'E' + str(cellnumber)
 ws[cellRYear].value = yearRead
 
 # DIRECTOR(S)
-cellRDirector_1 = 'F' + str(cellnumber)
-ws[cellRDirector_1].value = None                # removing the previous value from the cell
-if director_1_Read != None:
-        ws[cellRDirector_1].value = director_1_Read
-
-cellRDirector_2 = 'F' + str(int(cellnumber) + 1)
-ws[cellRDirector_2].value = None
-if director_2_Read != None:
-        ws[cellRDirector_2].value = director_2_Read
-
-cellRDirector_3 = 'F' + str(int(cellnumber) + 2)
-ws[cellRDirector_3].value = None
-if director_3_Read != None:
-        ws[cellRDirector_3].value = director_3_Read
+cellRDirector = 'F' + str(cellnumber)
+ws[cellRDirector].value = '-'                # ignoring the directors for TV shows
 
 # STAR(S)
 cellRStar_1 = 'G' + str(cellnumber)
@@ -258,6 +228,13 @@ link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
 driver.get(link)
 
 # BYE BYE BANNER
+print()
+print(' Please note '.center(len('TV Mini Series: length of thw whole show'),'*'))
+print('TV Series: length of an episode')
+print('TV Mini Series: length of the whole show')
+print('Will be added to the sheet.'.center(len('TV Mini Series: length of thw whole show'),))
+print()
+
 k = 6
 print()
 print(' Z-z-z '*k)
