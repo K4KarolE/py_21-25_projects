@@ -19,6 +19,12 @@
 24 - Movie Quotes To Clipboard - V1 - Chapter 6 - Practice
 - start the program in command line -> it will copy the value of the keyphrase to clipboard
 
-25 - Movie Quotes To Clipboard - V2 - Chapter 6 - Practice
+24 - Movie Quotes To Clipboard - V2 - Chapter 6 - Practice
 - ask the user for a keyword or list of the keywords or quite
 - the movie quote belongs to the keyword will be displayed and copied to the clipboard
+
+25 - Print List as Table - Chapter 6 - Practice
+- inspect the list (length)
+- determine how many items will be in 1 column
+- determine the longest word in every column, that will be the width of that column
+- turn the list into a table with 3 right adjusted columns
