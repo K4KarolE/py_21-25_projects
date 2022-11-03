@@ -13,7 +13,7 @@
 
 table = ['zoo','fishy','coffee','fragile','mobile','cemetery','midget','toitoi','hangover']   # 9
 
-columnNumber = 10
+columnNumber = 3
 tableLength = len(table)
 
 averageColumnLength = int(tableLength / columnNumber)
@@ -29,9 +29,14 @@ print('\n')
 
 print()
 
-tableList = []                  # creating list for every column in a list
-for i in range(columnNumber):
-        tableList.append([])
+
+
+# CREATING LISTS
+tableList = []
+columnWidth = []                  
+for i in range(columnNumber):       
+        tableList.append([])        # creating list for every column
+        columnWidth.append([0])      # creating list for every column`s width
 
 if columnNumber < tableLength:
     for i in range(columnNumber):
@@ -41,10 +46,34 @@ if columnNumber < tableLength:
             tableList[i].append(table[averageColumnLength*i+p+1])   # adding an extra item to the list
             del table[averageColumnLength*i+p+1]    # removing this extra item from the original/chosen list, so the next list will not include this item
             mod -= 1
-    print(tableList)
+
+# FINDING THE WIDTH OF EVERY COLUMN   
+    for i in range(columnNumber):
+        for p in range(len(tableList[i])):
+            if len(tableList[i][p]) > columnWidth[i][0]:
+                columnWidth[i][0] = len(tableList[i][p])
+
+# PRINTING THE COLUMNS / TABLE
+    for p in range(len(tableList[p])):
+        for i in range(columnNumber):
+            print(tableList[i][p].rjust(columnWidth[i][0]), end = '   ')
+        print()
+
+                
+    
+
+
+
+
+
+
+
+
+# print(columnWidth)
+# print(tableList)
 print()
 
-
+# FINDING THE LONGEST ITEM IN THE LISTS/COLUMNS
 
     
 
