@@ -24,7 +24,7 @@
 - the movie quote belongs to the keyword will be displayed and copied to the clipboard
 
 25 - Polymorphic Table - Chapter 6 - Practice
-- ask the user for the number of words should be displayed (1-100)
+- ask the user for the number of words should be displayed
 - ask the user for the number of columns should we use
 - create a list for every column
 - find the longest word/item in every column, it`s length will be the width of that column
