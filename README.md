@@ -6,7 +6,7 @@
 - paste it into the excel sheet
 - repeat it for the full sheet -> we are going to have a better estimations about the total time spent on watching movies
 
-22 - Movie Details Scraping - Excel + Selenium / optimized for movies, not ideal for TV series, TV specials /
+22 - Movie Details Scraping - Excel + Selenium / optimized for movies, not ideal for TV series (project 23) , TV specials/movies (project 27) /
 - ask the new title`s IMDb link
 - collect the movie details(title, director, stars..) from the site and add to the excel sheet
 - open the poster image in the same tab (the poster image is not 'right click saveable' on IMDb by default)
