@@ -140,12 +140,12 @@ ws[cell].value = titleRead
 cellRYear = 'E' + str(cellnumber)
 ws[cellRYear].value = yearRead
 
-# DIRECTOR(S)
-cellRDirector = 'F' + str(cellnumber)
-ws[cellRDirector].value = '-'                # ignoring the directors for TV shows
+# DIRECTOR(S) - removing the previous values from the sheet
+cellRDirector_1 = 'F' + str(cellnumber)
+ws[cellRDirector_1].value = None                
 
 cellRDirector_2 = 'F' + str(int(cellnumber) + 1)
-ws[cellRDirector_2].value = None                        # removing the previous value from the cell
+ws[cellRDirector_2].value = None
 
 cellRDirector_3 = 'F' + str(int(cellnumber) + 2)
 ws[cellRDirector_3].value = None
