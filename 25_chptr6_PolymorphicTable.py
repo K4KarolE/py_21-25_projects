@@ -42,7 +42,6 @@ while True:
         print()                                 # we would add an extra item to the lists, starting with the 1st list
                                                 # example: 24 items in the chosen list, in 5 columns: we should place 1 extra item in the first 4 columns
 
-
 # NUMBER OF COLUMNS < NUMBER OF ITEMS
 # CREATING LISTS
         tableList = []
@@ -76,9 +75,9 @@ while True:
             for item in tableList:
                 print(item.rjust(columnWidth[i][0]))
 
-# NUMBER OF COLUMNS > 1
+# NUMBER OF COLUMNS > 1, < NUMBER OF ITEMS - will print the results in at least 2 lines
         maxListLength = len(tableList[0])   # because we moved one of the "modulo" items into the 1st list (if there was any, like: 21 items in 5 columns)
-                                            # this list`s` length will be the maximum(or equal to other +modulo items list`s length, like: 24 items in 5 columns)
+                                            # this list`s length will be the maximum(or equal to other +modulo items list`s length, like: 24 items in 5 columns -> first 4 lists` length = max)
         if columnNumber > 1 and columnNumber < tableLength:
             print('- YOUR TABLE -'.center(tableWidth,'-'))
             for g in range(maxListLength):
@@ -87,7 +86,7 @@ while True:
                         print(tableList[k][g].rjust(columnWidth[k][0]), end = '  ')       
                 print()
 
-# NUMBER OF COLUMNS > NUMBER OF ITEMS
+# NUMBER OF COLUMNS > NUMBER OF ITEMS - will print the results in one line
         if columnNumber >= tableLength:
             for i in range(len(table)):
                 tableWidth = tableWidth + len(table[i]) + 1
