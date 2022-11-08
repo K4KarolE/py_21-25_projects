@@ -26,7 +26,7 @@ print()
 k = 11
 print(' Z-z-z '*k)
 print()
-print(' I am Db Bee! '.center(len(' Z-z-z '*k)))
+print(' I aM D bee! '.center(len(' Z-z-z '*k)))
 print()
 print(' Z-z-z '*k)
 print('\n')
