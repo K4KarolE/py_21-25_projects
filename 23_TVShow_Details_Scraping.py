@@ -15,7 +15,7 @@ from selenium import webdriver
 
 from datetime import date
 
-from tkinter import Tk
+import pyperclip as pc
 
 import sys, webbrowser
 
@@ -33,8 +33,7 @@ print()
 print(' Z-z-z '*k)
 print('\n')
 
-# link = input(' Please add the new Movie`s IMDb link: ')
-link = Tk().clipboard_get()     #taking the link from clipboard
+link = pc.paste()               #taking the link from clipboard
 cellnumber = 3
 
 PATH = 'C:\Program Files (x86)\chromedriver.exe'
@@ -218,7 +217,16 @@ ws[day].value = formula
 cellRFirst = 'O' + str(cellnumber)
 ws[cellRFirst].value = '1st'        
 
-wb.save('D:/Movies_New_Record.xlsx')
+# SAVE THE SHEET
+openSheet = True
+while openSheet == True:
+        try:
+                wb.save('D:/Movies_New_Record.xlsx')
+                openSheet = False
+                print('\n')
+        except:
+                print()
+                input('!!! ERROR - Close your sheet and hit Enter !!!')
 
 # POSTER IMAGE
 try:
