@@ -15,7 +15,14 @@ from selenium import webdriver
 
 from datetime import date
 
-import sys
+from tkinter import Tk
+
+# from requests import options            #headless chrome / it is slower
+# options = webdriver.ChromeOptions()
+# options.headless = True
+
+
+import sys, webbrowser
 
 from openpyxl import load_workbook
 wb = load_workbook('D:/Movies_New_Record.xlsx')
@@ -31,11 +38,14 @@ print()
 print(' Z-z-z '*k)
 print('\n')
 
-link = input(' Please add the new Movie`s IMDb link: ')
+# link = input(' Please add the new Movie`s IMDb link: ')
+link = Tk().clipboard_get()     #taking the link from clipboard
 cellnumber = 3
 
 PATH = 'C:\Program Files (x86)\chromedriver.exe'
+# driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
 driver = webdriver.Chrome(PATH)
+driver.minimize_window()
 driver.get(link)
 
 # VARIABLES FOR THE READOUT - avoiding errors at the excel writing stage
@@ -247,18 +257,15 @@ wb.save('D:/Movies_New_Record.xlsx')
 try:
         poster = driver.find_element(By.CSS_SELECTOR, '.ipc-media--poster-l > img:nth-child(1)')
         posterLink = poster.get_attribute('src')
-        driver.get(posterLink)
+        webbrowser.open(posterLink)
 except:
         print()
         print('*** ERROR - POSTER ***')
         print()
 
 # LOOKING FOR THE HUNGARIAN TITLE
-driver.execute_script("window.open('about:blank','secondtab');")        # open a new tab in the browser
-driver.switch_to.window("secondtab")
-
 link = 'https://www.mafab.hu/search/&search='+ ' '.join([titleRead, yearRead])
-driver.get(link)
+webbrowser.open(link)
 
 # BYE BYE BANNER
 k = 6
@@ -267,10 +274,5 @@ print(' Z-z-z '*k)
 print()
 print(' Honey added to your jar! '.center(len(' Z-z-z '*k)))
 print()
-print(' Press Enter to quit '.center(len(' Z-z-z '*k)))
-print()
 print(' Z-z-z '*k)
 print()
-
-input()
-sys.exit()
