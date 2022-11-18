@@ -17,7 +17,7 @@ from datetime import date
 
 import pyperclip as pc
 
-import sys, webbrowser
+import sys, webbrowser, platform
 
 from openpyxl import load_workbook
 wb = load_workbook('D:/Movies_New_Record.xlsx')
@@ -36,10 +36,25 @@ print('\n')
 link = pc.paste()               #taking the link from clipboard
 cellnumber = 3
 
-PATH = 'C:\Program Files (x86)\chromedriver.exe'
-driver = webdriver.Chrome(PATH)
-driver.minimize_window() # looks way faster than headless chrome
-driver.get(link)
+if platform.system() == 'Windows':
+        from openpyxl import load_workbook
+        wb = load_workbook('D:/Movies_New_Record.xlsx')
+        ws = wb.active
+
+        PATH = 'C:\Program Files (x86)\chromedriver.exe'
+        driver = webdriver.Chrome(PATH) # driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
+        driver.minimize_window()
+        driver.get(link)
+
+if platform.system() == 'Linux':
+        from openpyxl import load_workbook
+        wb = load_workbook(r'/media/zsandark/D/Movies_New_Record.xlsx')
+        ws = wb.active
+
+        PATH = '/home/zsandark/Downloads/chromedriver'
+        driver = webdriver.Chrome(PATH) # driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
+        driver.minimize_window()
+        driver.get(link)
 
 # VARIABLES FOR THE READOUT - avoiding errors at the excel writing stage
 # - if the there are less than 3 records/types to add
@@ -221,9 +236,15 @@ ws[cellRFirst].value = '1st'
 openSheet = True
 while openSheet == True:
         try:
-                wb.save('D:/Movies_New_Record.xlsx')
-                openSheet = False
-                print('\n')
+                if platform.system() == 'Windows':
+                        wb.save('D:/Movies_New_Record.xlsx')
+                        openSheet = False
+                        print('\n')
+
+                if platform.system() == 'Linux':
+                        wb.save(r'/media/zsandark/D/Movies_New_Record.xlsx')
+                        openSheet = False
+                        print('\n')
         except:
                 print()
                 input('!!! ERROR - Close your sheet and hit Enter !!!')
