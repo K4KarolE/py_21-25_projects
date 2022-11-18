@@ -55,7 +55,7 @@ if platform.system() == 'Linux':
         wb = load_workbook(r'/media/zsandark/D/Movies_New_Record.xlsx')
         ws = wb.active
 
-        PATH = '/home/zsandark/Downloads/chromedriver'
+        PATH = '/home/zsandark/_DEV/Support/Chrome_driver/chromedriver'
         driver = webdriver.Chrome(PATH) # driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
         driver.minimize_window()
         driver.get(link)
