@@ -1,3 +1,4 @@
+#!/bin python3.11
 '''
 23 - TV Show Details Scraping - Excel + Selenium / optimized for TV series /
 - ask the new title`s IMDb link
@@ -44,7 +45,7 @@ if platform.system() == 'Windows':
 
 if platform.system() == 'Linux':
         from openpyxl import load_workbook
-        wb = load_workbook(r'/media/zsandark/D/Movies_New_Record.xlsx')
+        wb = load_workbook(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
         ws = wb.active
 
         PATH = '/home/zsandark/_DEV/Support/Chrome_driver/chromedriver'
@@ -238,7 +239,7 @@ while openSheet == True:
                         print('\n')
 
                 if platform.system() == 'Linux':
-                        wb.save(r'/media/zsandark/D/Movies_New_Record.xlsx')
+                        wb.save(r'/home/zsandark/Desktop/Movies_New_Record.xlsx')
                         openSheet = False
                         print('\n')
         except:
