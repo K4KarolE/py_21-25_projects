@@ -17,13 +17,13 @@ from selenium import webdriver
 
 from datetime import date
 
-# from tkinter import Tk
 import pyperclip as pc
 
-
-# from requests import options            #headless chrome / it is slower
+# headless chrome / it is slower
+# from requests import options            
 # options = webdriver.ChromeOptions()
 # options.headless = True
+# driver = webdriver.Chrome(PATH, chrome_options=options)
 
 import sys, webbrowser, platform, shutil
 
@@ -49,7 +49,7 @@ if platform.system() == 'Windows':
         ws = wb.active
 
         PATH = 'C:\Program Files (x86)\chromedriver.exe'
-        driver = webdriver.Chrome(PATH) # driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
+        driver = webdriver.Chrome(PATH)
         driver.minimize_window()
         driver.get(link)
 
@@ -59,7 +59,7 @@ if platform.system() == 'Linux':
         ws = wb.active
 
         PATH = '/home/zsandark/_DEV/Support/Chrome_driver/chromedriver'
-        driver = webdriver.Chrome(PATH) # driver = webdriver.Chrome(PATH, chrome_options=options) #headless chrome / it is slower
+        driver = webdriver.Chrome(PATH)
         driver.minimize_window()
         driver.get(link)
 
